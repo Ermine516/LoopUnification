@@ -1,0 +1,7 @@
+COMMENT: Infinite loop. r jumps in size from 5 to 7 to 6.
+FUNCTION: h 2
+FUNCTION: f 1
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+h(h(x(1),h(x(3),h(x(2),x(1)))),ll) h(y(1),h(y(3),h(y(2),y(1))))

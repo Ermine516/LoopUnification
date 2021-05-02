@@ -1,0 +1,5 @@
+FUNCTION: h 2
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+h(h(x(2),h(x(1),x(1))),ll) h(y(4),h(y(2),y(4)))

@@ -1,0 +1,7 @@
+COMMENT: Fails to unify at the 10th iteration
+FUNCTION: h 2
+FUNCTION: f 1
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+h(h(x(1),h(x(3),h(x(3),x(1)))),ll) h(y(1),h(y(3),h(y(3),y(1))))

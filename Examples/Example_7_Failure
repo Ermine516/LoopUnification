@@ -1,0 +1,8 @@
+COMMENT: This example has a fairly complex construction before failure.
+COMMENT: Fails at round 28
+FUNCTION: h 3
+FUNCTION: f 1
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+h(h(x(1),h(x(16),h(x(32),h(x(1),h(x(16),x(32)))))),ll) h(y(1),h(y(16),h(y(32),h(y(1),h(y(16),y(32))))))

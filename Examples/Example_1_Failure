@@ -1,0 +1,7 @@
+COMMENT: Failure at round 3.
+FUNCTION: h 3
+FUNCTION: f 2
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+h(x(3),h(f(x(3),x(3)),x(1),x(1)),ll) h(y(3),y(1),y(1))

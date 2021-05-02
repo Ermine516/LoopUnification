@@ -1,0 +1,11 @@
+COMMENT: Two failures and an Infinite loop. the size of r is quite complex in this Example
+FUNCTION: h 2
+FUNCTION: f 1
+FUNCTION: a 0
+FUNCTION: b 0
+VARIABLE: x
+VARIABLE: y
+LOOP: ll
+COMMENT: h(h(x(1),h(x(3),h(x(1),x(3)))),ll) h(y(1),h(y(3),h(y(1),y(3)))) Fails after 4 rounds
+COMMENT: h(h(x(1),h(x(2),h(x(1),x(2)))),ll) h(y(1),h(y(2),h(y(1),y(2)))) Fails after 6 rounds
+h(h(x(1),h(x(4),h(x(1),x(4)))),ll) h(y(1),h(y(4),h(y(1),y(4))))
