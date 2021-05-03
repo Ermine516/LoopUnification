@@ -22,7 +22,7 @@ class UnifFast:
 
         def setProblem(self,left,right):
             self.F = TermForest.TermForest([left,right])
-            self.F.roots[0].mergeEqClass(self.F.roots[1],self.F)
+            if len(self.F.roots) > 1: self.F.roots[0].mergeEqClass(self.F.roots[1],self.F)
             self.unifiers = []
 
         def Loopterms(self):
