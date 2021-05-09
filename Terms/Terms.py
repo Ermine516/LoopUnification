@@ -16,6 +16,13 @@ class Term:
                "_"+self.args[0].head if self.var  else \
                "("+functools.reduce(lambda a , b: a+b+","  ,[t.__str__() for t in self.args],"")[:-1]+")"
         return self.head + rest
+
+    def __repr__(self):
+        rest = "" if self.arity==0  else \
+               "("+self.args[0].head+")" if self.var  else \
+               "("+functools.reduce(lambda a , b: a+b+","  ,[t.__repr__() for t in self.args],"")[:-1]+")"
+        return self.head + rest
+
     def __eq__(self,other):
         return functools.reduce(lambda a , b: a and b  ,[t1.__eq__(t2) for t1 ,t2 in zip(self.args,other.args)],True) \
                if self.head == other.head and (len(self.args) == len(other.args)) else False
@@ -103,6 +110,10 @@ class Term:
 
     def iterateBy(self,term):
             self.shift()
+            self.replaceAll(self.loopOcc().pop(),term)
+            return None
+    def iterateByTwo(self,term):
+            term.shift()
             self.replaceAll(self.loopOcc().pop(),term)
             return None
 

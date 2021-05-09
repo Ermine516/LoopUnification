@@ -11,7 +11,7 @@ class GraphNode:
         self.rank = 0
         self.rootrank = 0
         self.deleted = False
-        self.classed = False
+
     def isClassRoot(self): return self.eqclass == self
 
     def findEqClass(self):
@@ -28,7 +28,7 @@ class GraphNode:
         right.eqclass = left
         left.rootrank = left.rootrank+right.rootrank
         if left.rank == right.rank: left.rank= left.rank+1
-        if left.rootrank == 0 :F.rootclasses.remove(right)
+        if left.rootrank == 0 : F.rootclasses.remove(right)
         return None
 
     def rootrankshift(self,F):
@@ -38,7 +38,7 @@ class GraphNode:
             shiftrank= True
             x, x.eqclass = (x.eqclass,x.eqclass.eqclass)
         if shiftrank: x.rootrank=x.rootrank-1
-        if x.rootrank ==0 and not x.classed: F.rootclasses.append(x)
+        if x.rootrank ==0: F.rootclasses.append(x)
         return x
 
     def __str__(self):
