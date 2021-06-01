@@ -38,6 +38,15 @@ class UnifFast:
                         if j>= len(reaches) or reaches[j] != j+1: reaches.insert(j,0)
                         else:  reaches[j]=1
             return (largest,premat)
+        def processUnif(self):
+            for i in range(0,len(self.unifiers)):
+                l,r = self.unifiers[i]
+                if(not l.loop and r.var and r.head == "y"):
+                    self.unifiers[i] = (r,l)
+                elif(not l.loop and r.var and r.head == "x"):
+                    if(int(r.args[0].head)> int(l.args[0].head)):
+                        self.unifiers[i] = (r,l)
+
         def buildUnif(self):
             for i in range(0,len(self.unifiers)):
                 l,r = self.unifiers[i]
@@ -85,8 +94,8 @@ class UnifFast:
             else: return 1
 
         def solve(self):
+            theeqClass = set()
             while not self.F.rootclasses == []:
-
                   rc = self.F.rootclasses.pop(0)
                   curRootClass = list(filter(lambda a: a.findEqClass() ==rc, self.F.roots))
                   rf=list(filter(lambda a: not a.Variable, curRootClass ))
@@ -97,8 +106,12 @@ class UnifFast:
                           if fc.term.loop: self.unifiers.append((copy.copy(fc.term),copy.copy(mem.term)))
                           else: self.unifiers.append((copy.copy(mem.term),copy.copy(fc.term)))
                       else:
-                          for i in range(0,len(fc.children)):
-                              fc.children[i].findEqClass().mergeEqClass(mem.children[i].findEqClass(),self.F)
+                          for i in range(0,len(fc.term.args)):
+                              fcCh = next(filter(lambda a: a.term == fc.term.args[i] ,fc.children))
+                              memCh= next(filter(lambda a: a.term == mem.term.args[i] ,mem.children))
+                              if(fcCh.term.head  == "ll" or memCh.term.head == "ll"): theeqClass.update({fcCh.term, memCh.term})
+                              fcCh.findEqClass().mergeEqClass(memCh.findEqClass(),self.F)
                   for n in curRootClass+[fc]:
                       self.F.deleteRoot(n)
+            #print([repr(t) for t in theeqClass])
             return self.F.empty()
